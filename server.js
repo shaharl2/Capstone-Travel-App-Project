@@ -36,16 +36,12 @@ app.get("/all", (req, res) => {
 
 // Post Route
 
-projectData = [];
-app.post("/add", function (req, res) {
-  let newEntry = {
-    date: req.body.date,
-    temp: req.body.temp,
-    zip: req.body.zip,
-    feelings: req.body.feelings,
-  };
+app.post("/addData", addData);
 
-  projectData.push(newEntry);
+function addData(req, res) {
+  projectData["date"] = req.body.date;
+  projectData["temperature"] = req.body.temp;
+  projectData["feelings"] = req.body.feelings;
   res.send(projectData);
   console.log(projectData);
-});
+}

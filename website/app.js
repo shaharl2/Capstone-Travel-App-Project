@@ -1,12 +1,12 @@
 /* Global Variables */
 // Personal API Key for OpenWeatherMap API
 
-let baseURL = "http://api.openweathermap.org/data/2.5/weather?zip=";
-let apiKey = "&APPID=c8b54500d5e9ffa850e25490925f845c&units=imperial";
+const baseURL = "http://api.openweathermap.org/data/2.5/weather?zip=";
+const apiKey = "&APPID=c8b54500d5e9ffa850e25490925f845c&units=imperial";
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
+let newDate = d.getMonth() + 1 + "/" + d.getDate() + "/" + d.getFullYear();
 
 // Event listener to add function to existing HTML DOM element
 
@@ -19,7 +19,7 @@ function performAction(e) {
   const newFeelings = document.getElementById("feelings").value;
   getWeather(baseURL, newZip, apiKey).then(function (data) {
     // Add data
-    postData("/add", {
+    postData("/addData", {
       date: newDate,
       temp: data.main.temp,
       zip: newZip,
@@ -35,6 +35,7 @@ const getWeather = async (baseURL, zip, key) => {
   const res = await fetch(baseURL + zip + key);
   try {
     const data = await res.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.log("error", error);
@@ -69,10 +70,10 @@ const updateUI = async () => {
   const request = await fetch("/all");
   try {
     const allData = await request.json();
-    document.getElementById("date").innerHTML = allData[0].date;
+    document.getElementById("date").innerHTML = allData.date;
     document.getElementById("temp").innerHTML =
-      Math.round(allData[0].temp) + " degrees";
-    document.getElementById("content").innerHTML = allData[0].feelings;
+      Math.round(allData.temperature) + " degrees";
+    document.getElementById("content").innerHTML = allData.feelings;
   } catch (error) {
     console.log("error", error);
   }
