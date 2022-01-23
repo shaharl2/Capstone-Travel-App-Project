@@ -1,6 +1,7 @@
 body {
   background: #fffff8;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  // font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Belleza", "Open Sans", sans-serif;
 }
 
 #app {
@@ -8,12 +9,14 @@ body {
   grid-auto-rows: minmax(150px, auto);
   /* grid-template-columns:  */
   /* height: 100vh; */
-  background: #f23557;
-  color: #f0d43a;
+  background: teal;
+  color: black;
   justify-content: center;
   grid-gap: 1em;
   font-size: 20px;
-  font-family: "Oswald", sans-serif;
+  // font-family: "Oswald", sans-serif;
+  // font-family: "Belleza", "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .holder {
@@ -36,6 +39,7 @@ body {
 }
 
 .headline {
+  font-size: 38px;
 }
 .title {
 }
