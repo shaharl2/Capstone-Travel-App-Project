@@ -21,28 +21,42 @@
   <body>
     <div id="app">
       <div class="holder headline">Travel Planner</div>
-      <div class="holder zip">
-        <label for="city">Were do you want to go?</label>
-        <input type="text" id="city" placeholder="enter city name here" />
-      </div>
-      <div id="destination"></div>
-      <div id="date"></div>
-      <div id="tripCounter"></div>
-      <div id="weather"></div>
 
-      <div class="holder feel">
-        <!-- <label for="feelings">How are you feeling today?</label>
-        <textarea
-          class="myInput"
-          id="feelings"
-          placeholder="Enter your feelings here"
-          rows="9"
-          cols="50"
-        ></textarea> -->
-        <label for="departure">Departure:</label>
-        <input type="date" id="departure" name="departure" />
+      <div class="user-box">
+        <div>
+          <label for="city">Were do you want to go?</label>
+          <input type="text" id="city" placeholder="enter city name here" />
+        </div>
+        <div>
+          <label for="departure">Departure:</label>
+          <input type="date" id="departure" name="departure" />
+        </div>
         <button id="generate" type="submit">Find Trips</button>
       </div>
+
+      <div class="main-content">
+        <div class="pic" id="photo">
+          <img src="" />
+        </div>
+        <div class="info-box">
+          <div id="destination"></div>
+          <div id="date"></div>
+          <div id="tripCounter"></div>
+          <div id="weather"></div>
+          <div class="pic" id="icon">
+            <img src="" />
+          </div>
+          <div id="weatherPlusOne"></div>
+          <div class="pic" id="iconPlusOne">
+            <img src="" />
+          </div>
+          <div id="weatherPlusTwo"></div>
+          <div class="pic" id="iconPlusTwo">
+            <img src="" />
+          </div>
+        </div>
+      </div>
+
       <div class="holder entry">
         <div class="title">Most Recent Entry</div>
         <div id="entryHolder">
@@ -53,9 +67,7 @@
           <div id="high"></div>
           <div id="low"></div>
           <div id="country"></div>
-          <div id="photo">
-            <img src="" />
-          </div>
+
           <!-- <div id="userFeelings"></div> -->
         </div>
       </div>

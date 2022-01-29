@@ -60,6 +60,17 @@ function addDataw(req, res) {
   projectData["highTemp"] = req.body.highTemp;
   projectData["lowTemp"] = req.body.lowTemp;
   projectData["description"] = req.body.description;
+  projectData["icon"] = req.body.icon;
+
+  projectData["highTempPlusOne"] = req.body.highTempPlusOne;
+  projectData["lowTempPlusOne"] = req.body.lowTempPlusOne;
+  projectData["descriptionPlusOne"] = req.body.descriptionPlusOne;
+  projectData["iconPlusOne"] = req.body.iconPlusOne;
+
+  projectData["highTempPlusTwo"] = req.body.highTempPlusTwo;
+  projectData["lowTempPlusTwo"] = req.body.lowTempPlusTwo;
+  projectData["descriptionPlusTwo"] = req.body.descriptionPlusTwo;
+  projectData["iconPlusTwo"] = req.body.iconPlusTwo;
 
   res.send(projectData);
   console.log(projectData);

@@ -82,8 +82,21 @@ function handleSubmit(event) {
   // const newFeelings = document.getElementById("feelings").value;
   const timeCounter = document.getElementById("departure").valueAsNumber;
   const departureDate = document.getElementById("departure").value;
-  console.log(departureDate);
+  const departureDatePlusOne = document.getElementById("departure").valueAsDate;
+  departureDatePlusOne.setDate(departureDatePlusOne.getDate() + 1);
+  // const departureDateThree = new Date(departureDateTwo);
+  const departureDatePlusTwo = departureDatePlusOne.toISOString().split("T")[0];
+  departureDatePlusOne.setDate(departureDatePlusOne.getDate() + 1);
+  const departureDatePlusThree = departureDatePlusOne
+    .toISOString()
+    .split("T")[0];
 
+  console.log(departureDate);
+  console.log(departureDatePlusOne);
+  // console.log(departureDateTwo);
+  // console.log(departureDateThree);
+  console.log(departureDatePlusTwo);
+  console.log(departureDatePlusThree);
   const now = new Date().getTime();
   //const countDownDate = timeCounter.valueAsNumber;
   console.log(timeCounter);
@@ -112,7 +125,7 @@ function handleSubmit(event) {
       time: daysLeft,
     });
     // updateUI();
-    if (daysLeft < 7) {
+    if (daysLeft < 16) {
       const getWeather = async (baseURLw, latitude, longtitude, keyw) => {
         const res = await fetch(
           baseURLw + latitude + "&lon=" + longtitude + keyw
@@ -138,6 +151,15 @@ function handleSubmit(event) {
           highTemp: dataw.data[daysLeft].max_temp,
           lowTemp: dataw.data[daysLeft].min_temp,
           description: dataw.data[daysLeft].weather.description,
+          icon: dataw.data[daysLeft].weather.icon,
+          highTempPlusOne: dataw.data[daysLeft + 1].max_temp,
+          lowTempPlusOne: dataw.data[daysLeft + 1].min_temp,
+          descriptionPlusOne: dataw.data[daysLeft + 1].weather.description,
+          iconPlusOne: dataw.data[daysLeft + 1].weather.icon,
+          highTempPlusTwo: dataw.data[daysLeft + 2].max_temp,
+          lowTempPlusTwo: dataw.data[daysLeft + 2].min_temp,
+          descriptionPlusTwo: dataw.data[daysLeft + 2].weather.description,
+          iconPlusTwo: dataw.data[daysLeft + 2].weather.icon,
         });
         updateUI();
       });
@@ -176,7 +198,7 @@ function handleSubmit(event) {
         data.geonames[0].lat,
         data.geonames[0].lng,
         departureDate.slice(5),
-        departureDate.slice(5),
+        departureDatePlusThree.slice(5),
         apiKey_weather
       ).then(function (dataw) {
         // Add data
@@ -186,6 +208,10 @@ function handleSubmit(event) {
         postDataw("/addDataw", {
           highTemp: dataw.data[0].max_temp,
           lowTemp: dataw.data[0].min_temp,
+          highTempPlusOne: dataw.data[1].max_temp,
+          lowTempPlusOne: dataw.data[1].min_temp,
+          highTempPlusTwo: dataw.data[2].max_temp,
+          lowTempPlusTwo: dataw.data[2].min_temp,
         });
         updateUI();
       });
@@ -206,10 +232,16 @@ function handleSubmit(event) {
     getImage(baseURL_pixabay, apiKey_pixabay, cityName).then(function (datai) {
       // Add data
       console.log(datai.hits[0].webformatURL);
-      postDatai("/addDatai", {
-        image: datai.hits[0].webformatURL,
-      });
-      updateUI();
+      console.log(datai.total);
+
+      if (datai.total > 0) {
+        postDatai("/addDatai", {
+          image: datai.hits[0].webformatURL,
+        });
+        updateUI();
+      } else {
+        alert("No hits! Please enter a valid destination");
+      }
     });
   });
   // }
@@ -318,25 +350,63 @@ function handleSubmit(event) {
       document.getElementById("country").innerHTML =
         "Country: " + allData.country;
       document.getElementById("destination").innerHTML =
-        "Your trip to: " + allData.city + ", " + allData.country;
-      document.getElementById("date").innerHTML = "Departing: " + departureDate;
-      document.getElementById("tripCounter").innerHTML =
+        "Your trip to " +
         allData.city +
         ", " +
         allData.country +
         " is " +
         allData.time +
         " days away";
-      if (daysLeft < 7) {
+      document.getElementById("date").innerHTML = "Departing: " + departureDate;
+      // document.getElementById("tripCounter").innerHTML =
+      //   allData.city +
+      //   ", " +
+      //   allData.country +
+      //   " is " +
+      //   allData.time +
+      //   " days away";
+      if (daysLeft < 16) {
         document.getElementById(
           "weather"
         ).innerHTML = `The weather forecast for ${allData.city}, ${allData.country} at ${departureDate} is: <br> High: ${allData.highTemp} Low: ${allData.lowTemp} <br> ${allData.description} throughout the day`;
+        document.getElementById(
+          "icon"
+        ).firstChild.src = `https://www.weatherbit.io/static/img/icons/${allData.icon}.png`;
+        document.getElementById(
+          "weatherPlusOne"
+        ).innerHTML = `The next day you should expect: <br> High: ${allData.highTempPlusOne} Low: ${allData.lowTempPlusOne} <br> ${allData.descriptionPlusOne} throughout the day`;
+        document.getElementById(
+          "iconPlusOne"
+        ).firstChild.src = `https://www.weatherbit.io/static/img/icons/${allData.iconPlusOne}.png`;
+        document.getElementById(
+          "weatherPlusTwo"
+        ).innerHTML = `The day after that you should expect: <br> High: ${allData.highTempPlusTwo} Low: ${allData.lowTempPlusTwo} <br> ${allData.descriptionPlusTwo} throughout the day`;
+        document.getElementById(
+          "iconPlusTwo"
+        ).firstChild.src = `https://www.weatherbit.io/static/img/icons/${allData.iconPlusTwo}.png`;
       } else {
         document.getElementById("weather").innerHTML = `Typical weather for ${
           allData.city
         }, ${allData.country} at ${departureDate.slice(5)} is: <br> High: ${
           allData.highTemp
         } Low: ${allData.lowTemp}`;
+        document.getElementById("icon").firstChild.src = "";
+        document.getElementById(
+          "weatherPlusOne"
+        ).innerHTML = `A typical weather at ${departureDatePlusTwo.slice(
+          5
+        )} would be: <br> High: ${allData.highTempPlusOne} Low: ${
+          allData.lowTempPlusOne
+        }`;
+        document.getElementById("iconPlusOne").firstChild.src = "";
+        document.getElementById(
+          "weatherPlusTwo"
+        ).innerHTML = `A typical weather at ${departureDatePlusThree.slice(
+          5
+        )} would be: <br> High: ${allData.highTempPlusTwo} Low: ${
+          allData.lowTempPlusTwo
+        }`;
+        document.getElementById("iconPlusTwo").firstChild.src = "";
       }
       document.getElementById("lng").innerHTML =
         "Longtitude: " + allData.longtitude;
