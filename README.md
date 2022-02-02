@@ -1,10 +1,31 @@
-# Weather-Journal App Project
+# Capstone Travel Planner App
 
-## Overview
-This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI. 
+## Project Description
+
+In this project I built a travel app that obtains a desired trip location & date from the user, and displays weather and an image of the location using information obtained from external APIs
+
+The project includes a simple form where the user enters the city he is traveling to and the date he is leaving. If the trip is within the next 16 days, the app will return the weather forecast for the departure date, the next day, and two days after departure date. If the trip is in the future, the app returns a predicted forecast based on the average temperatures of the last 30 years at the departure date, and the two following days.
+
+## Content and Dependencies
+
+- Webpack
+- Express
+- Sass styles
+- Webpack Loaders and Plugins
+- Service workers
 
 ## Instructions
-This will require modifying the `server.js` file and the `website/app.js` file. You can see `index.html` for element references, and once you are finished with the project steps, you can use `style.css` to style your application to customized perfection.
+
+Build and start the webpack dev server at port 8080
+_npm run build-dev_
+
+In a diferrent terminal run the command:
+_npm run build-prod_
+
+and then run the Express server on port 3030:
+
+_npm run start_
 
 ## Extras
-If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
+
+- Jest testing unit is intalled. run the _npm run test command_ to test the handleSubmit functions and the express server.
