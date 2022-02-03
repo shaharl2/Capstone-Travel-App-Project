@@ -1,26 +1,26 @@
 body {
   background: #fffff8;
-  // font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   font-family: "Belleza", "Open Sans", sans-serif;
   margin: 0;
   line-height: normal;
+  width: 100%;
 }
 
 #app {
   display: grid;
-  grid-auto-rows: minmax(150px, auto);
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax(200px, auto);
   background: lightsteelblue;
   color: black;
   grid-gap: 1em;
-  font-size: 20px;
   font-family: "Belleza", "Open Sans", sans-serif;
 }
 
 .user-box {
   display: flex;
   align-items: flex-end;
-  gap: 0 10px;
-  margin: 10px;
+  gap: 0 5px;
+  margin: 5px;
 }
 
 #city {
@@ -48,7 +48,11 @@ body {
 }
 
 #photo {
-  margin: 0 25px;
+  margin: 0 5px;
+}
+
+.image {
+  width: 100%;
 }
 
 #content {
@@ -59,18 +63,16 @@ body {
   align-items: center;
   justify-content: center;
   font-family: "Open Sans", sans-serif;
-  font-size: 38px;
+  font-size: 30px;
   background-color: #fff;
 }
 .info-box {
   font-weight: 900;
-  font-size: 28px;
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
 label {
   display: block;
-  font-size: 17px;
   font-weight: 600;
 }
 
@@ -79,9 +81,7 @@ input {
   background-color: #fff;
   border: 1px solid #bacdd8;
   border-radius: 12px;
-  height: 60px;
-  width: 320px;
-  font-size: 20px;
+  padding: 8px 12px;
   font-family: "Oswald", sans-serif;
   box-shadow: 2px 4px 5px #444;
 }
@@ -92,7 +92,7 @@ input:hover {
 
 button {
   border: none;
-  padding: 12px 24px;
+  padding: 8px 12px;
   border-radius: 12px;
   text-decoration: none;
   font-weight: 600;
@@ -100,13 +100,9 @@ button {
   color: #788697;
   background-color: #e0efff;
   transition: background-color 200ms ease-in-out;
-  display: block;
+  display: inline-block;
   cursor: pointer;
-  width: 238px;
-  height: 60px;
-  font-size: 22px;
   font-family: "Oswald", sans-serif;
-  // border: none;
   box-shadow: 2px 4px 5px #444;
 }
 
@@ -116,7 +112,6 @@ button:hover {
 
 textarea {
   background: #22b2da;
-  font-size: 20px;
   font-family: "Oswald", sans-serif;
 }
 /* Reset style for HTML element on active to have no border*/
@@ -129,18 +124,78 @@ button:focus {
 /* Style for Placeholder Text*/
 ::placeholder {
   /* Firefox, Chrome, Opera */
-  // color: #f0d43a;
   font-family: "Oswald", sans-serif;
 }
 
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  // color: #f0d43a;
   font-family: "Oswald", sans-serif;
 }
 
 ::-ms-input-placeholder {
   /* Microsoft Edge */
-  // color: #f0d43a;
   font-family: "Oswald", sans-serif;
+}
+
+/* *************************************************************** */
+/* ** media query for medium screen. ** */
+/* *************************************************************** */
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .headline {
+    font-size: 44px;
+  }
+  input {
+    padding: 8px 18px;
+  }
+  button {
+    padding: 8px 24px;
+  }
+
+  .user-box {
+    gap: 0 10px;
+    margin: 10px;
+  }
+  .info-box {
+    font-size: 22px;
+    padding: 5px;
+  }
+
+  label {
+    font-size: 17px;
+  }
+  #photo {
+    margin: 0 15px;
+  }
+}
+
+/* *************************************************************** */
+/* ** media query for large screen. ** */
+/* *************************************************************** */
+
+@media (min-width: 901px) {
+  .headline {
+    font-size: 48px;
+  }
+  input {
+    padding: 8px 22px;
+  }
+  button {
+    padding: 8px 30px;
+  }
+  .user-box {
+    gap: 0 15px;
+    margin: 15px;
+  }
+  .info-box {
+    font-size: 28px;
+    padding: 10px;
+  }
+
+  label {
+    font-size: 20px;
+  }
+  #photo {
+    margin: 0 25px;
+  }
 }
